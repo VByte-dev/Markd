@@ -1,0 +1,42 @@
+let BookmarkCard = (props) => {
+  let { id, url, title, note, tag, visitCount, createdAt } = props.bookmarks;
+  return (
+    <>
+      <section className="mb-4 md:mb-8 border-2 rounded-md p-4 bg-white border-light">
+        <div className="flex justify-between mb-2 md:mb-4">
+          <div className="border-2 w-8 h-8 flex justify-center items-center rounded-md bg-dark border-mid font-[bricolage] text-surface">
+            <h1>{visitCount}</h1>
+          </div>
+          <div className="border-2 w-8 h-8 flex justify-center items-center rounded-md bg-red-400 border-red-300 font-[bricolage] text-surface">
+            <i className="ri-delete-bin-line"></i>
+          </div>
+        </div>
+        <div
+          className="bg-surface rounded-md p-4 border-2 border-light cursor-pointer"
+          title={`Visit ${url}`}
+          onClick={() => {
+            window.open(url, "_blank");
+          }}
+        >
+          <h1 className="font-[coolvetica] text-green-950 text-lg md:text-xl">
+            {title}
+          </h1>
+          <h1 className="font-[coolvetica] truncate text-deep  text-md md:text-lg">
+            {note}
+          </h1>
+          <h1 className=" font-[coolvetica] text-deep opacity-80 flex items-center gap-1 mt-1 md:mt-2 text-sm md:text-base">
+            <i className="ri-link"></i>
+            {url}
+          </h1>
+          <div className="mt-2 md:mt-4">
+            <h1 className="border-2 font-[bricolage] text-xs md:text-sm bg-light text-deep border-mid inline px-4 py-1 rounded-full">
+              {tag}
+            </h1>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default BookmarkCard;

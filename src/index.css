@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* Fonts */
+@font-face {
+  font-family: "bricolage";
+  src: url("/fonts/BricolageGrotesque-Bold-BF648bd57888479.ttf");
+}
+
+@font-face {
+  font-family: "coolvetica";
+  src: url("/fonts/Coolvetica-Rg.otf");
+}
+@font-face {
+  font-family: "instrumentSerif";
+  src: url("/fonts/InstrumentSerif-Regular.ttf");
+}
+
+/* Colors */
+@theme {
+  --color-surface: #F4F7E8;
+  --color-light: #DCE7C5;
+  --color-mid: #A4C78F;
+  --color-dark: #5D9363;
+  --color-deep: #354330;
+
+  --color-white: #FFFFFF;
+  --color-danger: #DC2626;
+}
+
+html, body{
+  background-color: #EDF1D6;
+}
