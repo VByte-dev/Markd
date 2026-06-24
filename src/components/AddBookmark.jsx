@@ -30,6 +30,7 @@ let AddBookmark = (props) => {
     );
     console.log("Bookmark saved successfully:", newBookmark);
 
+    window.dispatchEvent(new Event("bookmarksUpdated"));
     handleIsFormClose(true);
 
     setUrl("");
@@ -106,7 +107,7 @@ let AddBookmark = (props) => {
           <div className="mt-6">
             <button
               type="submit"
-              className="bg-deep text-sm text-surface font-[bricolage] w-full py-2 rounded-lg border-2 border-deep transition md:text-base"
+              className="bg-deep text-sm text-surface font-[bricolage] w-full py-2 rounded-lg border-2 border-deep transition md:text-base cursor-pointer"
             >
               Add Bookmark
             </button>

@@ -17,7 +17,7 @@ let Header = () => {
         </h1>
         <div>
           <button
-            className="bg-deep text-surface rounded font-[bricolage] text-xs py-2 px-4 md:text-sm"
+            className="bg-deep text-surface rounded font-[bricolage] text-xs py-2 px-4 md:text-sm cursor-pointer"
             onClick={() => {
               setIsFormClose(!isFormClose);
             }}

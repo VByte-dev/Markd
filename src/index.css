@@ -30,3 +30,6 @@
 html, body{
   background-color: #EDF1D6;
 }
+button{
+  cursor: pointer;
+}
