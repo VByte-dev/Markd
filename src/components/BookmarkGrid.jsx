@@ -29,7 +29,7 @@ let BookmarkGrid = () => {
       let parsedData = JSON.parse(storedData);
       let vcUpdatedBookmarks = parsedData.map((v, i, a) => {
         if (v.id === id) {
-          v.visitCount = ++v.visitCount;
+          v.visitCount = ++v.visitCount;  
         }
         return v;
       });
