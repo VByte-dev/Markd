@@ -1,9 +1,13 @@
-// Components
 import { useEffect, useState } from "react";
+
+// Componentsa
 import BookmarkCard from "./BookmarkCard";
+import SearchBar from "./SearchBar";
+import Filters from "./Filters";
 
 let BookmarkGrid = () => {
   let [bookmarks, setBookmarks] = useState([]);
+  let [searchQuery, setSearchQuery] = useState("");
 
   let handleDelete = (id) => {
     let storedData = localStorage.getItem("readlater_bookmarks");
@@ -29,7 +33,7 @@ let BookmarkGrid = () => {
       let parsedData = JSON.parse(storedData);
       let vcUpdatedBookmarks = parsedData.map((v, i, a) => {
         if (v.id === id) {
-          v.visitCount = ++v.visitCount;  
+          v.visitCount = ++v.visitCount;
         }
         return v;
       });
@@ -40,6 +44,18 @@ let BookmarkGrid = () => {
       window.dispatchEvent(new Event("bookmarksUpdated"));
     }
   };
+
+  let handleSearch = (sQ) => {
+    setSearchQuery(sQ);
+  };
+
+  let filteredBookmarks = bookmarks.filter((v, i, a) => {
+    return (
+      v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      v.note.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      v.url.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   useEffect(() => {
     let fetchBookmarks = () => {
@@ -61,17 +77,27 @@ let BookmarkGrid = () => {
 
   return (
     <>
-      <section className="mt-25">
-        {bookmarks.map((v, i, a) => {
-          return (
-            <BookmarkCard
-              bookmarks={v}
-              handleDelete={handleDelete}
-              handleVisitCounter={handleVisitCounter}
-              key={i}
-            />
-          );
-        })}
+      <section className="mt-15 md:mt-20">
+        <div className="flex gap-2">
+          <SearchBar handleSearch={handleSearch} />
+          <Filters />
+        </div>
+        <div className="mt-10 md:mt-15">
+          {filteredBookmarks.length === 0 ? (
+            <p className="font-[coolvetica] text-deep text-center">Nothing matched</p>
+          ) : (
+            filteredBookmarks.map((v, i, a) => {
+              return (
+                <BookmarkCard
+                  bookmarks={v}
+                  handleDelete={handleDelete}
+                  handleVisitCounter={handleVisitCounter}
+                  key={i}
+                />
+              );
+            })
+          )}
+        </div>
       </section>
     </>
   );

@@ -109,7 +109,7 @@ let AddBookmark = (props) => {
               type="submit"
               className="bg-deep text-sm text-surface font-[bricolage] w-full py-2 rounded-lg border-2 border-deep transition md:text-base cursor-pointer"
             >
-              Add Bookmark
+              Mark It
             </button>
           </div>
         </form>
