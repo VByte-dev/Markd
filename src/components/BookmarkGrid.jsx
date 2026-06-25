@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-// Componentsa
+// Components
 import BookmarkCard from "./BookmarkCard";
 import SearchBar from "./SearchBar";
 import Filters from "./Filters";
+import StateMessage from "./StateMessage";
 
 let BookmarkGrid = () => {
   let [bookmarks, setBookmarks] = useState([]);
@@ -83,8 +84,16 @@ let BookmarkGrid = () => {
           <Filters />
         </div>
         <div className="mt-10 md:mt-15">
-          {filteredBookmarks.length === 0 ? (
-            <p className="font-[coolvetica] text-deep text-center">Nothing matched</p>
+          {bookmarks.length === 0 ? (
+            <StateMessage
+              title={"Nothing saved yet"}
+              description={"Save something worth revisiting "}
+            />
+          ) : filteredBookmarks.length === 0 ? (
+            <StateMessage
+              title={"Nothing matched"}
+              description={"Try a different keyword"}
+            />
           ) : (
             filteredBookmarks.map((v, i, a) => {
               return (
