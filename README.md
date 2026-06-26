@@ -17,3 +17,5 @@ Traditional bookmarks store links but lose context. Over time, collections becom
 🚧 **Currently under development**
 
 Markd is in the MVP development phase. Features and workflows are actively being implemented and refined.
+
+---
