@@ -132,7 +132,6 @@ let BookmarkGrid = () => {
             <Refine
               bookmarks={bookmarks}
               refine={refine}
-              setRefine={setRefine}
               handleRefine={handleRefine}
             />
           </div>
