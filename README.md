@@ -159,7 +159,7 @@ src/
 Clone the repository.
 
 ```bash
-git clone https://github.com/<your-username>/markd.git
+git clone https://github.com/vbyte-dev/markd.git
 ```
 
 Install project dependencies.
