@@ -7,7 +7,7 @@ import BookmarkGrid from "./components/BookmarkGrid";
 let App = () => {
   return (
     <>
-      <div className="mx-4 mt-8 md:mt-16 md:mx-16 lg:mx-96">
+      <div className="mx-4 mt-8 md:mt-16 md:mx-16 lg:mx-96 selection:bg-deep selection:text-surface">
         <Header />
         <BookmarkGrid />
       </div>
