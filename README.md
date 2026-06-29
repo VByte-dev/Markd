@@ -2,7 +2,7 @@
 
 > **Context-driven knowledge bookmarking.**
 
-Markd is a local-first application that transforms traditional bookmarks into searchable knowledge. By capturing the context behind every saved resource through notes, tags, and usage insights, Markd helps users rediscover information instead of collecting forgotten links.
+Markd is a context-driven knowledge bookmarking application built to solve the "save and forget" problem. Unlike traditional bookmark managers that store links and titles, Markd preserves the intent behind every saved resource, turning bookmarks into searchable, reusable knowledge. By combining contextual notes, lightweight tagging, unified search, and usage tracking, it helps users build a knowledge base that becomes easier to rediscover, manage, and learn from over time.
 
 <p align="center">
   <a href="https://markdhq.vercel.app"><strong>Live Demo</strong></a>
