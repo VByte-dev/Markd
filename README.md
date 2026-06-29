@@ -214,13 +214,17 @@ The MVP implements the complete bookmarking workflow.
 
 ## Future Work
 
-* Browser extension
-* Import and export
-* Cross-device synchronization
-* User authentication
-* Semantic search
-* Duplicate detection
-* Dead link validation
+- Browser extension
+- Import and export
+- Cross-device synchronization
+- User authentication
+- AI-powered semantic search
+- AI-generated bookmark summaries
+- Smart tag suggestions
+- Related bookmark recommendations
+- Duplicate detection
+- Dead link validation
+
 
 ---
 
