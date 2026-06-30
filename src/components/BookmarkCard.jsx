@@ -25,7 +25,7 @@ let BookmarkCard = (props) => {
           </div>
         </div>
         <div
-          className="bg-surface rounded-md p-4 border-2 border-light cursor-pointer"
+          className="bg-surface rounded-md p-4 border-2 border-light cursor-pointer truncate"
           title={`Visit ${url}`}
           onClick={() => {
             window.open(url, "_blank");

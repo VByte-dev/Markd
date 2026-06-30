@@ -8,14 +8,16 @@ let Refine = (props) => {
     <>
       <section className="w-full my-4 md:my-6 p-2 md:p-4 bg-white rounded-2xl border-2 border-light text-deep">
         {/* Tag */}
-        <div className="flex items-center gap-8 bg-surface p-4 rounded-2xl cursor-pointer border-2 border-light">
-          <h1 className="font-[coolvetica] text-sm md:text-base">Category</h1>
-          <div className="flex items-center flex-wrap gap-2 font-[bricolage]">
+        <div className="grid grid-cols-4 items-center gap-8 bg-surface p-4 rounded-2xl cursor-pointer border-2 border-light">
+          <h1 className="font-[coolvetica] text-sm md:text-base col-span-1">
+            Category
+          </h1>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 font-[bricolage] col-span-3">
             {tags.map((v, i, a) => {
               return (
                 <div
                   key={i}
-                  className={`text-xs md:text-sm lowercase border-2 px-3 py-1 rounded-full ${refine.tag === v ? "bg-deep text-surface border-deep " : "bg-light border-mid text-deep"}`}
+                  className={`text-xs md:text-sm lowercase border-2 px-3 py-1 rounded-full ${refine.tag === v ? "bg-deep text-surface border-deep " : "bg-light border-mid text-deep"} flex justify-center truncate`}
                   onClick={() => {
                     let newRefine = {
                       tag: v,
@@ -32,15 +34,17 @@ let Refine = (props) => {
         </div>
 
         {/* Usage */}
-        <div className="flex items-center gap-8 mt-4 bg-surface p-4 rounded-2xl cursor-pointer border-2 border-light">
-          <h1 className="font-[coolvetica] text-sm md:text-base">Status</h1>
+        <div className="grid grid-cols-4  items-center gap-8 mt-4 bg-surface p-4 rounded-2xl cursor-pointer border-2 border-light ">
+          <h1 className="font-[coolvetica] text-sm md:text-base col-span-1">
+            Status
+          </h1>
 
-          <div className="flex items-center flex-wrap gap-2 font-[bricolage]">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 font-[bricolage] col-span-3">
             {usage.map((v, i, a) => {
               return (
                 <div
                   key={i}
-                  className={`text-xs md:text-sm lowercase border-2 px-3 py-1 rounded-full ${refine.usage === v ? "bg-deep text-surface border-deep " : "bg-light border-mid text-deep"}`}
+                  className={`text-xs md:text-sm lowercase border-2 px-3 py-1 rounded-full ${refine.usage === v ? "bg-deep text-surface border-deep " : "bg-light border-mid text-deep"} flex justify-center truncate`}
                   onClick={() => {
                     let newRefine = {
                       tag: refine.tag,
