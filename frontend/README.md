@@ -8,15 +8,12 @@ Markd is a context-driven knowledge bookmarking application built to solve the "
   <a href="https://markdhq.vercel.app"><strong>Live Demo</strong></a>
 </p>
 
----
-
 ## Preview
 
 <p align="center">
   <img src="./public/preview.gif" alt="Markd application preview" width="900">
 </p>
 
----
 
 ## Overview
 
@@ -28,7 +25,6 @@ Traditional bookmarking systems store a URL and page title, but rarely the reaso
 
 Markd addresses this by treating every bookmark as a knowledge object that combines a resource with personal context, making retrieval faster, organization simpler, and collections easier to maintain.
 
----
 
 ## Core Capabilities
 
@@ -45,7 +41,6 @@ Each bookmark stores structured metadata alongside the resource.
 
 Capturing intent ensures resources remain meaningful long after they are saved.
 
----
 
 ### Contextual Search
 
@@ -57,19 +52,16 @@ Search operates across multiple fields simultaneously.
 
 Users can retrieve resources using remembered context rather than exact page titles or domains.
 
----
 
 ### Lightweight Organization
 
 Flat tags replace nested folder hierarchies, reducing organizational overhead while keeping resources easy to categorize and refine.
 
----
 
 ### Usage Tracking
 
 Visit counts are updated automatically whenever a bookmark is opened, providing a simple signal for distinguishing frequently referenced resources from forgotten ones.
 
----
 
 ### Local-first Persistence
 
@@ -83,7 +75,6 @@ The application requires:
 
 Bookmarks remain immediately available with zero setup.
 
----
 
 ## Technical Highlights
 
@@ -95,32 +86,33 @@ Bookmarks remain immediately available with zero setup.
 * Single-source application state
 * Zero backend dependencies
 
----
 
 ## Architecture
 
 ```text
-                         User
+                   User Interaction
                            │
                            ▼
-                  React Components
+                    React Components
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+      Create          Search & Refine     Manage
+   (Bookmarks)                           (Visit/Delete)
+          └────────────────┬────────────────┘
+                           ▼
+                  LocalStorage API
                            │
                            ▼
-                  Application State
-                           │
-         ┌─────────────────┴─────────────────┐
-         ▼                                   ▼
-  Search Engine                     Refine Engine
-         │                                   │
-         └─────────────────┬─────────────────┘
-                           ▼
-                  Bookmark Collection
+        bookmarksUpdated (Custom Event)
                            │
                            ▼
-                     LocalStorage
+             React State Synchronization
+                           │
+                           ▼
+                    User Interface
 ```
 
----
 
 ## Technology
 
@@ -132,7 +124,6 @@ Bookmarks remain immediately available with zero setup.
 | Vite              | Development Environment |
 | LocalStorage API  | Client-side Persistence |
 
----
 
 ## Project Structure
 
@@ -151,8 +142,6 @@ src/
 ├── main.jsx
 └── index.css
 ```
-
----
 
 ## Running Locally
 
@@ -174,7 +163,6 @@ Start the development server.
 npm run dev
 ```
 
----
 
 ## Design Decisions
 
@@ -190,11 +178,14 @@ Flat tags eliminate the maintenance burden associated with nested folder structu
 
 Information should be discoverable through memory and context instead of navigation alone.
 
+### Usage-aware Knowledge
+
+Bookmarks automatically track visits, providing lightweight usage signals that help distinguish frequently referenced resources from forgotten ones.
+
 ### Local-first Architecture
 
 The MVP intentionally avoids backend infrastructure to prioritize simplicity, instant responsiveness, and user ownership of data.
 
----
 
 ## Current Scope
 
@@ -210,7 +201,6 @@ The MVP implements the complete bookmarking workflow.
 * Responsive interface
 * Persistent local storage
 
----
 
 ## Future Work
 
@@ -225,8 +215,6 @@ The MVP implements the complete bookmarking workflow.
 - Duplicate detection
 - Dead link validation
 
-
----
 
 ## License
 
