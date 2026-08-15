@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 // Components
 import BookmarkCard from "./BookmarkCard";
@@ -6,30 +7,140 @@ import SearchBar from "./SearchBar";
 import Refine from "./Refine";
 import StateMessage from "./StateMessage";
 
-let BookmarkGrid = () => {
-  let [bookmarks, setBookmarks] = useState([]);
-  let [searchQuery, setSearchQuery] = useState("");
-  let [refine, setRefine] = useState({
+const BookmarkGrid = () => {
+  const [bookmarks, setBookmarks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [refine, setRefine] = useState({
     tag: "all",
     usage: "all",
   });
-  let [isRefineClose, setIsRefineClose] = useState(true);
+  const [isRefineClose, setIsRefineClose] = useState(true);
 
-  let handleRefine = (newRefine) => {
+  const fetchBookmarks = async () => {
+    // LocalStorage Version
+    // const storedData = localStorage.getItem("readlater_bookmarks");
+
+    // if (storedData) {
+    //   const parsedData = JSON.parse(storedData);
+    //   setBookmarks(parsedData);
+    // }
+
+    // API Version
+    try {
+      const response = await axios.get("http://localhost:3000/bookmark");
+
+      console.log(response.data.data);
+
+      setBookmarks(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRefine = (newRefine) => {
     setRefine(newRefine);
     setIsRefineClose(true);
   };
 
+  const handleDelete = async (id) => {
+    // LocalStorage Version
+    // const storedData = localStorage.getItem("readlater_bookmarks");
+
+    // if (storedData) {
+    //   const parsedData = JSON.parse(storedData);
+
+    //   const restBookmarks = parsedData.filter(
+    //     (bookmark) => bookmark.id !== id,
+    //   );
+
+    //   localStorage.setItem(
+    //     "readlater_bookmarks",
+    //     JSON.stringify(restBookmarks),
+    //   );
+
+    //   window.dispatchEvent(
+    //     new Event("bookmarksUpdated"),
+    //   );
+    // }
+
+    // API Version
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/bookmark/${id}`,
+      );
+
+      console.log(response.data);
+
+      fetchBookmarks();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleVisitCounter = async (id) => {
+    // LocalStorage Version
+    // const storedData = localStorage.getItem("readlater_bookmarks");
+
+    // if (storedData) {
+    //   const parsedData = JSON.parse(storedData);
+
+    //   const updatedBookmarks = parsedData.map(
+    //     (bookmark) => {
+    //       if (bookmark.id === id) {
+    //         bookmark.visitCount += 1;
+    //       }
+
+    //       return bookmark;
+    //     },
+    //   );
+
+    //   localStorage.setItem(
+    //     "readlater_bookmarks",
+    //     JSON.stringify(updatedBookmarks),
+    //   );
+
+    //   window.dispatchEvent(
+    //     new Event("bookmarksUpdated"),
+    //   );
+    // }
+
+    // API Version
+    const bookmark = bookmarks.find((bookmark) => bookmark._id === id);
+
+    if (!bookmark) {
+      return;
+    }
+
+    const newVisitCount = bookmark.visitCount + 1;
+
+    try {
+      const response = await axios.patch(
+        `http://localhost:3000/bookmark/${id}`,
+        {
+          visitCount: newVisitCount,
+        },
+      );
+
+      console.log(response.data);
+
+      fetchBookmarks();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSearch = (searchValue) => {
+    setSearchQuery(searchValue);
+  };
+
   let refinedBookmarks = [...bookmarks];
 
-  // Tag filter
   if (refine.tag !== "all") {
     refinedBookmarks = refinedBookmarks.filter(
       (bookmark) => bookmark.tag === refine.tag,
     );
   }
 
-  // Usage filter
   if (refine.usage === "unused") {
     refinedBookmarks = refinedBookmarks.filter(
       (bookmark) => bookmark.visitCount === 0,
@@ -42,63 +153,17 @@ let BookmarkGrid = () => {
     );
   }
 
-  let handleDelete = (id) => {
-    let storedData = localStorage.getItem("readlater_bookmarks");
-    if (storedData) {
-      let parsedData = JSON.parse(storedData);
-      let restBookmarks = parsedData.filter((v, i, a) => {
-        if (v.id !== id) {
-          return true;
-        }
-      });
-      localStorage.setItem(
-        "readlater_bookmarks",
-        JSON.stringify(restBookmarks),
-      );
-      window.dispatchEvent(new Event("bookmarksUpdated"));
-    }
-  };
+  refinedBookmarks = refinedBookmarks.filter((bookmark) => {
+    const query = searchQuery.toLowerCase();
 
-  let handleVisitCounter = (id) => {
-    let storedData = localStorage.getItem("readlater_bookmarks");
-
-    if (storedData) {
-      let parsedData = JSON.parse(storedData);
-      let vcUpdatedBookmarks = parsedData.map((v, i, a) => {
-        if (v.id === id) {
-          v.visitCount = ++v.visitCount;
-        }
-        return v;
-      });
-      localStorage.setItem(
-        "readlater_bookmarks",
-        JSON.stringify(vcUpdatedBookmarks),
-      );
-      window.dispatchEvent(new Event("bookmarksUpdated"));
-    }
-  };
-
-  let handleSearch = (sQ) => {
-    setSearchQuery(sQ);
-  };
-
-  refinedBookmarks = refinedBookmarks.filter((v, i, a) => {
     return (
-      v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.note.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.url.toLowerCase().includes(searchQuery.toLowerCase())
+      bookmark.title.toLowerCase().includes(query) ||
+      bookmark.note.toLowerCase().includes(query) ||
+      bookmark.url.toLowerCase().includes(query)
     );
   });
 
   useEffect(() => {
-    let fetchBookmarks = () => {
-      let storedData = localStorage.getItem("readlater_bookmarks");
-
-      if (storedData) {
-        let parsedData = JSON.parse(storedData);
-        setBookmarks(parsedData);
-      }
-    };
     fetchBookmarks();
 
     window.addEventListener("bookmarksUpdated", fetchBookmarks);
@@ -109,60 +174,55 @@ let BookmarkGrid = () => {
   }, []);
 
   return (
-    <>
-      <section className="mt-15 md:mt-20">
-        <div className="flex gap-2">
-          <SearchBar handleSearch={handleSearch} />
-          <div className="">
-            <button
-              className="bg-deep rounded-md font-[bricolage] text-surface h-10 md:h-11 px-8 text-sm md:text-base"
-              onClick={() => {
-                setIsRefineClose(!isRefineClose);
-              }}
-            >
-              Refine
-            </button>
-          </div>
-        </div>
+    <section className="mt-15 md:mt-20">
+      <div className="flex gap-2">
+        <SearchBar handleSearch={handleSearch} />
 
-        {isRefineClose ? (
-          ""
+        <div>
+          <button
+            className="bg-deep rounded-md font-[bricolage] text-surface h-10 md:h-11 px-8 text-sm md:text-base"
+            onClick={() => {
+              setIsRefineClose(!isRefineClose);
+            }}
+          >
+            Refine
+          </button>
+        </div>
+      </div>
+
+      {!isRefineClose && (
+        <div>
+          <Refine
+            bookmarks={bookmarks}
+            refine={refine}
+            handleRefine={handleRefine}
+          />
+        </div>
+      )}
+
+      <div className="mt-10 md:mt-15">
+        {bookmarks.length === 0 ? (
+          <StateMessage
+            title="Nothing saved yet"
+            description="Save something worth revisiting"
+          />
+        ) : refinedBookmarks.length === 0 ? (
+          <StateMessage
+            title="Nothing matched"
+            description="Try a different keyword"
+          />
         ) : (
-          <div>
-            <Refine
-              bookmarks={bookmarks}
-              refine={refine}
-              handleRefine={handleRefine}
+          refinedBookmarks.map((bookmark) => (
+            <BookmarkCard
+              key={bookmark._id}
+              bookmarks={bookmark}
+              handleDelete={handleDelete}
+              handleVisitCounter={handleVisitCounter}
             />
-          </div>
+          ))
         )}
-
-        <div className="mt-10 md:mt-15">
-          {bookmarks.length === 0 ? (
-            <StateMessage
-              title={"Nothing saved yet"}
-              description={"Save something worth revisiting "}
-            />
-          ) : refinedBookmarks.length === 0 ? (
-            <StateMessage
-              title={"Nothing matched"}
-              description={"Try a different keyword"}
-            />
-          ) : (
-            refinedBookmarks.map((v, i, a) => {
-              return (
-                <BookmarkCard
-                  bookmarks={v}
-                  handleDelete={handleDelete}
-                  handleVisitCounter={handleVisitCounter}
-                  key={v.id}
-                />
-              );
-            })
-          )}
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
