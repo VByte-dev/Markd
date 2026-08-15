@@ -35,15 +35,13 @@ const AddBookmark = (props) => {
 
     // API Version
     try {
-      const response = await axios.post("https://markd-5jlq.onrender.com/bookmark", {
+      await axios.post("https://markd-5jlq.onrender.com/bookmark", {
         url,
         title,
         note,
         tag,
         visitCount: 0,
       });
-
-      console.log(response.data);
 
       window.dispatchEvent(new Event("bookmarksUpdated"));
 

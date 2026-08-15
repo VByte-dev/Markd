@@ -27,9 +27,9 @@ const BookmarkGrid = () => {
 
     // API Version
     try {
-      const response = await axios.get("https://markd-5jlq.onrender.com/bookmark");
-
-      console.log(response.data.data);
+      const response = await axios.get(
+        "https://markd-5jlq.onrender.com/bookmark",
+      );
 
       setBookmarks(response.data.data);
     } catch (err) {
@@ -65,11 +65,7 @@ const BookmarkGrid = () => {
 
     // API Version
     try {
-      const response = await axios.delete(
-        `https://markd-5jlq.onrender.com/bookmark/${id}`,
-      );
-
-      console.log(response.data);
+      await axios.delete(`https://markd-5jlq.onrender.com/bookmark/${id}`);
 
       fetchBookmarks();
     } catch (err) {
@@ -114,14 +110,9 @@ const BookmarkGrid = () => {
     const newVisitCount = bookmark.visitCount + 1;
 
     try {
-      const response = await axios.patch(
-        `https://markd-5jlq.onrender.com/bookmark/${id}`,
-        {
-          visitCount: newVisitCount,
-        },
-      );
-
-      console.log(response.data);
+      await axios.patch(`https://markd-5jlq.onrender.com/bookmark/${id}`, {
+        visitCount: newVisitCount,
+      });
 
       fetchBookmarks();
     } catch (err) {
