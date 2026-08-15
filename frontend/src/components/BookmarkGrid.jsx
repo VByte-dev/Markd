@@ -27,7 +27,7 @@ const BookmarkGrid = () => {
 
     // API Version
     try {
-      const response = await axios.get("http://localhost:3000/bookmark");
+      const response = await axios.get("https://markd-5jlq.onrender.com/bookmark");
 
       console.log(response.data.data);
 
@@ -66,7 +66,7 @@ const BookmarkGrid = () => {
     // API Version
     try {
       const response = await axios.delete(
-        `http://localhost:3000/bookmark/${id}`,
+        `https://markd-5jlq.onrender.com/bookmark/${id}`,
       );
 
       console.log(response.data);
@@ -115,7 +115,7 @@ const BookmarkGrid = () => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:3000/bookmark/${id}`,
+        `https://markd-5jlq.onrender.com/bookmark/${id}`,
         {
           visitCount: newVisitCount,
         },
