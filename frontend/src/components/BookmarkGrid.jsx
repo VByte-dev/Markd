@@ -27,8 +27,15 @@ const BookmarkGrid = () => {
 
     // API Version
     try {
+      // Token
+      const token = localStorage.getItem("token");
       const response = await axios.get(
         "https://markd-5jlq.onrender.com/bookmark",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
 
       setBookmarks(response.data.data);
@@ -65,7 +72,13 @@ const BookmarkGrid = () => {
 
     // API Version
     try {
-      await axios.delete(`https://markd-5jlq.onrender.com/bookmark/${id}`);
+      // Token
+      const token = localStorage.getItem("token");
+      await axios.delete(`https://markd-5jlq.onrender.com/bookmark/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       fetchBookmarks();
     } catch (err) {
@@ -110,9 +123,19 @@ const BookmarkGrid = () => {
     const newVisitCount = bookmark.visitCount + 1;
 
     try {
-      await axios.patch(`https://markd-5jlq.onrender.com/bookmark/${id}`, {
-        visitCount: newVisitCount,
-      });
+      // Token
+      const token = localStorage.getItem("token");
+      await axios.patch(
+        `https://markd-5jlq.onrender.com/bookmark/${id}`,
+        {
+          visitCount: newVisitCount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       fetchBookmarks();
     } catch (err) {
@@ -148,9 +171,9 @@ const BookmarkGrid = () => {
     const query = searchQuery.toLowerCase();
 
     return (
-      bookmark.title.toLowerCase().includes(query) ||
-      bookmark.note.toLowerCase().includes(query) ||
-      bookmark.url.toLowerCase().includes(query)
+      bookmark.title?.toLowerCase().includes(query) ||
+      bookmark.note?.toLowerCase().includes(query) ||
+      bookmark.url?.toLowerCase().includes(query)
     );
   });
 
