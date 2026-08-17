@@ -7,7 +7,7 @@ import BookmarkGrid from "./components/BookmarkGrid";
 
 // Pages
 import Login from "./pages/Login";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoute";
 
 let MarkdApp = () => {
