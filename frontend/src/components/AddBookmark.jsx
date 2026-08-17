@@ -35,8 +35,7 @@ const AddBookmark = (props) => {
 
     // API Version
     try {
-      const token = localStorage.getItem("token");
-      console.log(token);
+      const token = localStorage.getItem("token"); 
       await axios.post(
         "https://markd-5jlq.onrender.com/bookmark",
         {

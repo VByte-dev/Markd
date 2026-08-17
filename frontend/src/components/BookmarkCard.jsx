@@ -30,11 +30,11 @@ const BookmarkCard = (props) => {
         className="bg-surface rounded-md p-4 border-2 border-light cursor-pointer truncate"
         title={`Visit ${url}`}
         onClick={() => {
-          console.log("URL:", url);
+          // console.log("URL:", url);
 
           const link = new URL(url.startsWith("http") ? url : `https://${url}`);
 
-          console.log("Opening:", link.href);
+          // console.log("Opening:", link.href);
 
           window.open(link.href, "_blank");
 

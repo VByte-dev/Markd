@@ -40,7 +40,7 @@ const Register = () => {
 
       const response = await axios.post(
         "https://markd-5jlq.onrender.com/auth/register",
-        { 
+        {
           name,
           email,
           password,
