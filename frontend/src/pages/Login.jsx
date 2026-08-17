@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import StateMessage from "../components/StateMessage";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [stateMessage, setStateMessage] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,23 +26,28 @@ const Login = () => {
       // Store JWT
       localStorage.setItem("token", response.data.token);
 
-      console.log("Login successful");
-      console.log(response.data);
+      setStateMessage({
+        title: "Login successful",
+        description: "Welcome back to Markd.",
+      });
 
       // Redirect to home
       navigate("/");
     } catch (err) {
-      console.log(err.response?.data?.message || "Server error");
+      setStateMessage({
+        title: "Login failed",
+        description:
+          err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      });
     }
   };
 
   return (
     <main className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
       <section className="w-full max-w-md">
-
         {/* Login Card */}
         <div className="bg-white border-2 border-light rounded-2xl p-6 md:p-8">
-
           {/* Header */}
           <div className="mb-8">
             <h1 className="font-[bricolage] text-center text-2xl md:text-3xl text-deep">
@@ -51,9 +59,18 @@ const Login = () => {
             </p>
           </div>
 
+          {/* State Message */}
+          {stateMessage && (
+            <div className="mb-6">
+              <StateMessage
+                title={stateMessage.title}
+                description={stateMessage.description}
+              />
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleLogin}>
-
             {/* Email */}
             <div className="mb-4">
               <label
@@ -101,7 +118,7 @@ const Login = () => {
               type="submit"
               className="bg-deep text-sm text-surface font-[bricolage] w-full py-2 rounded-lg border-2 border-deep transition md:text-base cursor-pointer"
             >
-              Sign in
+              Login
             </button>
           </form>
 
@@ -109,9 +126,7 @@ const Login = () => {
           <div className="flex items-center gap-3 my-6">
             <div className="h-px bg-light flex-1"></div>
 
-            <span className="font-[coolvetica] text-xs text-deep/40">
-              OR
-            </span>
+            <span className="font-[coolvetica] text-xs text-deep/40">OR</span>
 
             <div className="h-px bg-light flex-1"></div>
           </div>

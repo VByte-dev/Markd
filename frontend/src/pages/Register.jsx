@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import StateMessage from "../components/StateMessage";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,21 +11,27 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [error, setError] = useState("");
+  const [stateMessage, setStateMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    setError("");
+    setStateMessage(null);
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      setStateMessage({
+        title: "Registration failed",
+        description: "Passwords do not match.",
+      });
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
+      setStateMessage({
+        title: "Registration failed",
+        description: "Password must be at least 6 characters.",
+      });
       return;
     }
 
@@ -40,9 +47,6 @@ const Register = () => {
         },
       );
 
-      console.log("Registration successful");
-      console.log(response.data);
-
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
 
@@ -52,12 +56,12 @@ const Register = () => {
 
       navigate("/login");
     } catch (err) {
-      console.log(err);
-
-      setError(
-        err.response?.data?.message ||
+      setStateMessage({
+        title: "Registration failed",
+        description:
+          err.response?.data?.message ||
           "Unable to create your account. Please try again.",
-      );
+      });
     } finally {
       setLoading(false);
     }
@@ -66,10 +70,8 @@ const Register = () => {
   return (
     <main className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
       <section className="w-full max-w-md">
-
         {/* Register Card */}
         <div className="bg-white border-2 border-light rounded-2xl p-6 md:p-8">
-
           {/* Header */}
           <div className="mb-8">
             <h1 className="font-[bricolage] text-center text-2xl md:text-3xl text-deep">
@@ -81,18 +83,18 @@ const Register = () => {
             </p>
           </div>
 
-          {/* Error Message */}
-          {error && (
-            <div className="mb-5 px-4 py-3 rounded-lg border-2 border-light bg-surface">
-              <p className="font-[coolvetica] text-sm text-deep">
-                {error}
-              </p>
+          {/* State Message */}
+          {stateMessage && (
+            <div className="mb-5">
+              <StateMessage
+                title={stateMessage.title}
+                description={stateMessage.description}
+              />
             </div>
           )}
 
           {/* Form */}
           <form onSubmit={handleRegister}>
-
             {/* Name */}
             <div className="mb-4">
               <label
@@ -191,9 +193,7 @@ const Register = () => {
           <div className="flex items-center gap-3 my-6">
             <div className="h-px bg-light flex-1"></div>
 
-            <span className="font-[coolvetica] text-xs text-deep/40">
-              OR
-            </span>
+            <span className="font-[coolvetica] text-xs text-deep/40">OR</span>
 
             <div className="h-px bg-light flex-1"></div>
           </div>
@@ -204,7 +204,7 @@ const Register = () => {
               to="/login"
               className="text-deep font-semibold underline underline-offset-4 hover:text-deep/70 transition"
             >
-              Sign in
+              Login
             </Link>
           </p>
         </div>
