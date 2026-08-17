@@ -112,7 +112,7 @@ const Register = () => {
                 placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border-2 border-light outline-none rounded-lg py-2.5 px-4 text-deep bg-white focus:bg-surface focus:border-deep transition font-[coolvetica] text-sm md:text-base placeholder:text-deep/40"
+                className="w-full border-2 border-light outline-none rounded-lg py-2.5 px-4 text-deep bg-white focus:bg-surface transition font-[coolvetica] text-sm md:text-base placeholder:text-deep/40"
               />
             </div>
 
