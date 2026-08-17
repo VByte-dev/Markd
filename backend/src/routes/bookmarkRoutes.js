@@ -1,4 +1,6 @@
 const express = require("express");
+const authMiddleware = require("../middleware/authMiddleware")
+
 const {
   createBookmark,
   getBookmark,
@@ -7,7 +9,7 @@ const {
 } = require("../controllers/bookmarkController");
 
 const router = express.Router();
-
+router.use(authMiddleware);
 // Create bookmark
 router.post("/", createBookmark);
 
