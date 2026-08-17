@@ -39,7 +39,7 @@ const Login = () => {
         description:
           err.response?.data?.message ||
           "Something went wrong. Please try again.",
-      });
+      }); 
     }
   };
 
