@@ -1,6 +1,5 @@
 const Bookmark = require("../models/bookmark");
 
-// Post
 const createBookmark = async (req, res) => {
   const data = req.body;
 
@@ -17,7 +16,6 @@ const createBookmark = async (req, res) => {
   });
 };
 
-// Get
 const getBookmark = async (req, res) => {
   const data = await Bookmark.find({
     user: req.user.userId,
@@ -30,7 +28,6 @@ const getBookmark = async (req, res) => {
   });
 };
 
-// Delete
 const deleteBookmark = async (req, res) => {
   await Bookmark.findByIdAndDelete({
     _id: req.params.id,
@@ -43,7 +40,6 @@ const deleteBookmark = async (req, res) => {
   });
 };
 
-// Patch
 const patchBookmark = async (req, res) => {
   const data = req.body;
 

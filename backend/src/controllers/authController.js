@@ -21,7 +21,6 @@ const loginUser = async (req, res) => {
   try {
     let { email, password } = req.body;
 
-    // Finding user
     let user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({
@@ -29,7 +28,6 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Comparing password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -37,28 +35,23 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Creating JWT
-    let token = jwt.sign(
-      {userId: user._id},
-      process.env.JWT_SECRET,
-      {expiresIn: "1d"}
-    )
+    let token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
-    // Sending JWT to client
     res.json({
       status: res.statusCode,
       message: "Login successfull",
-      token: token
-    })
+      token: token,
+    });
   } catch (err) {
     res.status(500).json({
       message: "Server error",
     });
   }
-
 };
 
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
 };

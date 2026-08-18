@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Schema
 const userSchema = mongoose.Schema(
   {
     name: String,
@@ -9,10 +8,9 @@ const userSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-// Model
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

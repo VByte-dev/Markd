@@ -1,10 +1,10 @@
 const express = require("express");
 const bookmarkRoutes = require("./routes/bookmarkRoutes");
 const authRoutes = require("./routes/authRoutes");
-const cors = require("cors")
+const cors = require("cors");
 
 const app = express();
-// Middleware
+
 app.use(express.json());
 app.use(cors());
 app.use("/bookmark", bookmarkRoutes);

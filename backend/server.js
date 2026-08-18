@@ -5,7 +5,6 @@ const connectDB = require("./src/config/db");
 const dns = require("dns").promises;
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-// Connecting to the database
 connectDB();
 
 app.listen(3000, () => {

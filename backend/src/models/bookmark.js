@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Schema
 let bookmarkSchema = mongoose.Schema(
   {
     url: String,
@@ -11,18 +10,17 @@ let bookmarkSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    user:{
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
-    }
+      required: true,
+    },
   },
   {
     timestamps: true,
   },
 );
 
-// Model
 let Bookmark = mongoose.model("Bookmark", bookmarkSchema);
 
 module.exports = Bookmark;

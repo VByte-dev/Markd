@@ -28,7 +28,14 @@ let App = () => {
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/" element={<ProtectedRoute><MarkdApp /></ProtectedRoute>}></Route>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <MarkdApp />
+              </ProtectedRoute>
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
