@@ -1,7 +1,7 @@
 // Components
 import { useState } from "react";
 import AddBookmark from "./AddBookmark";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 let Header = () => {
   const navigateTo = useNavigate();
