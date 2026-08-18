@@ -11,7 +11,7 @@ Markd is a context-driven knowledge bookmarking application built to solve the "
 ## Preview
 
 <p align="center">
-  <img src="./preview.gif" alt="Markd application preview" width="900">
+  <img src="./preview-v1.gif" alt="Markd application preview" width="900">
 </p>
 
 ## Overview
