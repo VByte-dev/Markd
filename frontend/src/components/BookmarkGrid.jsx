@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import BookmarkCard from "./BookmarkCard";
@@ -8,6 +9,8 @@ import Refine from "./Refine";
 import StateMessage from "./StateMessage";
 
 const BookmarkGrid = () => {
+  const navigateTo = useNavigate();
+
   const [bookmarks, setBookmarks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [refine, setRefine] = useState({
@@ -37,6 +40,10 @@ const BookmarkGrid = () => {
           },
         },
       );
+      if(response.status===401){
+        localStorage.removeItem("token");
+        navigateTo("/login");
+      }
 
       setBookmarks(response.data.data);
     } catch (err) {
