@@ -40,13 +40,13 @@ const BookmarkGrid = () => {
           },
         },
       );
-      if(response.status===401){
-        localStorage.removeItem("token");
-        navigateTo("/login");
-      }
-
       setBookmarks(response.data.data);
     } catch (err) {
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+        console.log("From BookmarkGrid");
+        navigateTo("/login");
+      }
       console.log(err);
     }
   };
