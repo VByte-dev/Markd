@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Components
 import Header from "./components/Header";
+import ActionBar from "./components/ActionBar";
 import BookmarkGrid from "./components/BookmarkGrid";
 
 // Pages
@@ -15,6 +16,7 @@ let MarkdApp = () => {
     <>
       <div className="mx-4 mt-8 md:mt-16 md:mx-16 lg:mx-96 selection:bg-deep selection:text-surface">
         <Header />
+        <ActionBar />
         <BookmarkGrid />
       </div>
     </>

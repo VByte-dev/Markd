@@ -66,7 +66,7 @@ const AddBookmark = (props) => {
   };
 
   return (
-    <section className="w-full my-16 p-4 md:p-6 bg-white rounded-2xl border-2 border-light">
+    <section className="w-full mt-4 md:mt-6 mb-15 p-4 md:p-6 bg-white rounded-2xl border-2 border-light">
       <div
         className="flex justify-end mb-4 md:mb-6"
         onClick={() => {

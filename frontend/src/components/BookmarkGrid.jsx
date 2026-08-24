@@ -195,7 +195,7 @@ const BookmarkGrid = () => {
   }, []);
 
   return (
-    <section className="mt-15 md:mt-20">
+    <section className="mt-5 md:mt-10">
       <div className="flex gap-2">
         <SearchBar handleSearch={handleSearch} />
 
