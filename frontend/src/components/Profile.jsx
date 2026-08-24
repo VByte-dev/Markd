@@ -39,7 +39,7 @@ let Profile = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-12 md:top-14 w-60 rounded-md bg-surface border border-deep/10 shadow-xl p-2 z-50">
+        <div className="absolute right-0 top-12 md:top-14 w-60 rounded-md bg-surface border-2 border-light shadow-xl p-2 z-50">
           <div className="px-3 py-3">
             <div className="flex items-center gap-3">
               <div className="bg-deep h-10 w-10 md:h-12 md:w-12 text-md md:text-xl rounded-full flex items-center justify-center text-surface font-[bricolage] shrink-0">
