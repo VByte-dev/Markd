@@ -33,7 +33,7 @@ let Profile = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-deep h-8 w-8 md:h-10 md:w-10 rounded-full font-[bricolage] flex items-center justify-center text-surface overflow-hidden text-base md:text-lg select-none cursor-pointer"
+        className="bg-deep border-dark border-2 h-8 w-8 md:h-10 md:w-10 rounded-full font-[bricolage] flex items-center justify-center text-surface overflow-hidden text-base md:text-lg select-none cursor-pointer"
       >
         <h1>{userName.charAt(0)}</h1>
       </button>
