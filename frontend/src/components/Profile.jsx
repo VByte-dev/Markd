@@ -42,16 +42,16 @@ let Profile = () => {
         <div className="absolute right-0 top-12 md:top-14 w-60 rounded-md bg-surface border border-deep/10 shadow-xl p-2 z-50">
           <div className="px-3 py-3">
             <div className="flex items-center gap-3">
-              <div className="bg-deep h-10 w-10 rounded-full flex items-center justify-center text-surface font-[bricolage]">
+              <div className="bg-deep h-8 w-8 md:h-10 md:w-10 rounded-full flex items-center justify-center text-surface font-[bricolage] shrink-0">
                 {userName.charAt(0)}
               </div>
 
               <div className="min-w-0">
-                <p className="font-[bricolage] text-sm font-medium text-deep truncate">
+                <p className="font-[bricolage] text-sm md:text-base font-medium text-deep truncate">
                   {userName}
                 </p>
 
-                <p className="font-[coolvetica] text-xs text-deep/50 truncate">
+                <p className="font-[coolvetica] text-xs md:text-sm text-deep/50 truncate">
                   {email}
                 </p>
               </div>
