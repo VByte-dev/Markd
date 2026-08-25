@@ -35,7 +35,7 @@ let Profile = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="bg-deep border-dark border-2 h-8 w-8 md:h-10 md:w-10 rounded-full font-[bricolage] flex items-center justify-center text-surface overflow-hidden text-base md:text-lg select-none cursor-pointer"
       >
-        <h1>{userName.charAt(0)}</h1>
+        <h1>{userName.charAt(0).toLowerCase()}</h1>
       </button>
 
       {isOpen && (
@@ -43,12 +43,12 @@ let Profile = () => {
           <div className="px-3 py-3">
             <div className="flex items-center gap-3">
               <div className="bg-deep h-10 w-10 md:h-12 md:w-12 text-md md:text-xl rounded-full flex items-center justify-center text-surface font-[bricolage] shrink-0">
-                {userName.charAt(0)}
+                {userName.charAt(0).toLowerCase()}
               </div>
 
               <div className="min-w-0">
                 <p className="font-[bricolage] text-sm md:text-base font-medium text-deep truncate">
-                  {userName}
+                  {userName[0].toUpperCase() + userName.slice(1).toLowerCase()}
                 </p>
 
                 <p className="font-[coolvetica] text-xs md:text-sm text-deep/50 truncate">
