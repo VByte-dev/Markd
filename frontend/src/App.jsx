@@ -10,6 +10,7 @@ import BookmarkGrid from "./components/BookmarkGrid";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import LandingPage from "./pages/LandingPage";
 
 let MarkdApp = () => {
   return (
@@ -23,21 +24,28 @@ let MarkdApp = () => {
   );
 };
 
+let Home = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    return (
+      <ProtectedRoute>
+        <MarkdApp />
+      </ProtectedRoute>
+    );
+  }
+  return <LandingPage />;
+};
+
 let App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/landing" element={<LandingPage />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <MarkdApp />
-              </ProtectedRoute>
-            }
-          ></Route>
+          <Route path="/app" element={<ProtectedRoute><MarkdApp /></ProtectedRoute>}></Route>
+          <Route path="/" element={<Home />}></Route>
         </Routes>
       </BrowserRouter>
     </>
@@ -45,3 +53,4 @@ let App = () => {
 };
 
 export default App;
+
