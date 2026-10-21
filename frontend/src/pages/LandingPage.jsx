@@ -90,7 +90,7 @@ const LandingPage = () => {
         </header>
 
         {/* Hero Section */}
-        <section className="text-center pt-12 pb-16 sm:pt-20 sm:pb-24 md:pt-28 md:pb-32">
+        <section className="text-center pt-28 pb-16 sm:pb-24 md:pt-28 md:pb-32">
           <h1 className="font-[bricolage] text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-deep max-w-2xl mx-auto leading-[1.2] sm:leading-[1.15] tracking-tight">
             Ever opened an old bookmark and thought,{" "}
             <span className="font-[instrumentSerif] italic font-normal text-3xl sm:text-5xl md:text-6xl lg:text-7xl block sm:inline mt-1 sm:mt-0">
@@ -254,7 +254,7 @@ const LandingPage = () => {
         </section>
 
         {/* Call to Action */}
-        <section className="my-10 sm:my-16 md:my-24">
+        <section className="mt-10 sm:mt-16 md:mt-24 mb-16 sm:mb-24 md:mb-32">
           <div className="bg-deep text-surface rounded-xl sm:rounded-2xl md:rounded-3xl p-5 sm:p-10 md:p-16 text-center border border-dark/30">
             <h2 className="font-[bricolage] text-xl sm:text-3xl md:text-4xl lg:text-5xl text-surface tracking-tight max-w-xl mx-auto leading-tight">
               Your next bookmark deserves a reason.
@@ -284,7 +284,7 @@ const LandingPage = () => {
         </section>
 
         {/* Footer */}
-        <footer className="pt-8 sm:pt-12 pb-8 border-t border-deep/15">
+        <footer className="mt-32 md:mt-32 pt-8 sm:pt-12 pb-10 sm:pb-14 border-t border-deep/15">
           <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-12">
             <div className="space-y-3 sm:space-y-4">
               <Link
