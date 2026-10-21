@@ -53,6 +53,16 @@ const features = Object.freeze([
   },
 ]);
 
+// Subtle alternating tilts for an organic, collected index card aesthetic
+const cardRotations = [
+  "-rotate-1",
+  "rotate-1",
+  "rotate-1",
+  "-rotate-1",
+  "-rotate-1",
+  "rotate-1",
+];
+
 const LandingPage = () => {
   const navigate = useNavigate();
 
@@ -151,57 +161,60 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 md:gap-6">
-            {features.map((item, index) => (
-              <section
-                key={index}
-                className="border-2 rounded-md p-3 sm:p-4 bg-white border-light flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex justify-between mb-2 md:mb-4">
-                    <div className="border-2 w-7 h-7 sm:w-8 sm:h-8 flex justify-center items-center rounded-full bg-dark border-mid font-[bricolage] text-xs sm:text-sm text-surface">
-                      <h1>{item.visits}</h1>
+            {features.map((item, index) => {
+              const tiltClass = cardRotations[index % cardRotations.length];
+              return (
+                <section
+                  key={index}
+                  className={`relative border-2 select-none rounded-md p-3 sm:p-4 bg-white border-light flex flex-col justify-between transition-all duration-300 ease-out hover:z-10 hover:rotate-0 hover:-translate-y-1.5 hover:shadow-xl ${tiltClass}`}
+                >
+                  <div>
+                    <div className="flex justify-between mb-2 md:mb-4">
+                      <div className="border-2 w-7 h-7 sm:w-8 sm:h-8 flex justify-center items-center rounded-full bg-dark border-mid font-[bricolage] text-xs sm:text-sm text-surface">
+                        <h1>{item.visits}</h1>
+                      </div>
+
+                      <div
+                        className="cursor-pointer border-2 w-7 h-7 sm:w-8 sm:h-8 flex justify-center items-center rounded-md bg-red-400 border-red-300 font-[bricolage] text-xs sm:text-sm text-surface"
+                        title="Delete bookmark"
+                      >
+                        <i className="ri-delete-bin-line"></i>
+                      </div>
                     </div>
 
                     <div
-                      className="cursor-pointer border-2 w-7 h-7 sm:w-8 sm:h-8 flex justify-center items-center rounded-md bg-red-400 border-red-300 font-[bricolage] text-xs sm:text-sm text-surface"
-                      title="Delete bookmark"
+                      className="bg-surface rounded-md p-3 sm:p-4 border-2 border-light cursor-pointer"
+                      title={`Visit ${item.url}`}
                     >
-                      <i className="ri-delete-bin-line"></i>
+                      <h1 className="font-[coolvetica] text-green-950 text-base sm:text-lg md:text-xl capitalize leading-snug">
+                        {item.title}
+                      </h1>
+
+                      <h1 className="font-[coolvetica] text-deep text-sm sm:text-base md:text-lg mt-1 leading-snug">
+                        {item.note}
+                      </h1>
+
+                      <h1 className="font-[coolvetica] text-deep opacity-80 flex items-center gap-1 mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base lowercase min-w-0">
+                        <i className="ri-link shrink-0"></i>
+                        <span className="truncate">{item.url}</span>
+                      </h1>
+
+                      <div className="mt-2.5 sm:mt-4">
+                        <span className="border-2 font-[bricolage] text-[11px] sm:text-xs md:text-sm bg-light text-deep border-mid inline px-3 sm:px-4 py-0.5 sm:py-1 rounded-full lowercase">
+                          {item.tag}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  <div
-                    className="bg-surface rounded-md p-3 sm:p-4 border-2 border-light cursor-pointer"
-                    title={`Visit ${item.url}`}
-                  >
-                    <h1 className="font-[coolvetica] text-green-950 text-base sm:text-lg md:text-xl capitalize leading-snug">
-                      {item.title}
-                    </h1>
-
-                    <h1 className="font-[coolvetica] text-deep text-sm sm:text-base md:text-lg mt-1 leading-snug">
-                      {item.note}
-                    </h1>
-
-                    <h1 className="font-[coolvetica] text-deep opacity-80 flex items-center gap-1 mt-1.5 sm:mt-2 text-xs sm:text-sm md:text-base lowercase min-w-0">
-                      <i className="ri-link shrink-0"></i>
-                      <span className="truncate">{item.url}</span>
-                    </h1>
-
-                    <div className="mt-2.5 sm:mt-4">
-                      <span className="border-2 font-[bricolage] text-[11px] sm:text-xs md:text-sm bg-light text-deep border-mid inline px-3 sm:px-4 py-0.5 sm:py-1 rounded-full lowercase">
-                        {item.tag}
-                      </span>
-                    </div>
+                  <div className="flex justify-end mt-2.5 sm:mt-3">
+                    <span className="font-[coolvetica] text-deep opacity-80 text-xs md:text-sm">
+                      {item.date}
+                    </span>
                   </div>
-                </div>
-
-                <div className="flex justify-end mt-2.5 sm:mt-3">
-                  <span className="font-[coolvetica] text-deep opacity-80 text-xs md:text-sm">
-                    {item.date}
-                  </span>
-                </div>
-              </section>
-            ))}
+                </section>
+              );
+            })}
           </div>
 
           <p className="text-center font-[coolvetica] text-deep/60 text-xs sm:text-sm mt-5 sm:mt-6 px-2">
@@ -292,7 +305,7 @@ const LandingPage = () => {
                 <p>Tell me what's broken or what's missing.</p>
                 <p>Every message goes straight to me.</p>
                 <a
-                  href="mailto:vedhesh@markd.app?subject=Markd%20Feedback"
+                  href="mailto:vedhesh.contact@gmail.com?subject=Markd%20Feedback"
                   className="inline-flex items-center font-[bricolage] text-deep font-medium mt-1 transition gap-2 hover:gap-3 transition-all transition-linear"
                 >
                   <span>Send feedback</span>
@@ -308,39 +321,39 @@ const LandingPage = () => {
 
               <div className="flex flex-col space-y-1.5 sm:space-y-2 font-[coolvetica] text-xs sm:text-sm text-deep/80">
                 <a
-                  href="mailto:vedhesh@markd.app"
+                  href="mailto:vedhesh.contact@gmail.com"
                   className="hover:text-deep hover:underline underline-offset-2 transition py-0.5"
                 >
                   Email
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/VByte-dev"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-deep hover:underline underline-offset-2 transition py-0.5"
                 >
                   Github
                 </a>
                 <a
-                  href="https://x.com"
+                  href="https://x.com/VByteDev"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-deep hover:underline underline-offset-2 transition py-0.5"
                 >
                   X
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/vedhesh-narayanan"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-deep hover:underline underline-offset-2 transition py-0.5"
                 >
                   LinkedIn
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/vbyte.dev"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-deep hover:underline underline-offset-2 transition py-0.5"
                 >
                   Instagram
