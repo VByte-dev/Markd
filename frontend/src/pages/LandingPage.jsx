@@ -90,7 +90,7 @@ const LandingPage = () => {
         </header>
 
         {/* Hero Section */}
-        <section className="text-center pt-28 pb-32 sm:pb-24 md:pb-32">
+        <section className="text-center pt-28 pb-16 sm:pb-24 md:pb-32">
           <h1 className="font-[bricolage] text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-deep max-w-2xl mx-auto leading-[1.2] sm:leading-[1.15] tracking-tight">
             Ever opened an old bookmark and thought,{" "}
             <span className="font-[instrumentSerif] italic font-normal text-3xl sm:text-5xl md:text-6xl lg:text-7xl block sm:inline mt-1 sm:mt-0">
