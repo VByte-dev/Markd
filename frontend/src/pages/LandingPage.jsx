@@ -53,14 +53,14 @@ const features = Object.freeze([
   },
 ]);
 
-// Subtle alternating tilts for an organic, collected index card aesthetic
+// Subtle varied tilts for an organic, collected index card aesthetic
 const cardRotations = [
-  "-rotate-1",
-  "rotate-1",
-  "rotate-1",
-  "-rotate-1",
-  "-rotate-1",
-  "rotate-1",
+  "-rotate-[1.2deg]",
+  "rotate-[0.8deg]",
+  "rotate-[1.4deg]",
+  "-rotate-[0.7deg]",
+  "-rotate-[1.1deg]",
+  "rotate-[1deg]",
 ];
 
 const LandingPage = () => {
