@@ -77,7 +77,7 @@ const LandingPage = () => {
             className="text-deep font-[instrumentSerif] text-2xl sm:text-3xl md:text-4xl hover:opacity-80 transition tracking-tight"
             aria-label="Markd Home"
           >
-            Markd
+            markd.
           </Link>
 
           <button
